@@ -201,11 +201,11 @@ function Inspector({ candidate, candidates, selectedCandidateId, onCandidateChan
       {selectedJob && <div className="inspector-card match-inspector">
         <div className="inspector-card-kicker">SELECTED ROLE</div>
         <div className="selected-role-title"><strong>{selectedJob.title}</strong><span>{selectedJob.company}</span></div>
-        <div className="large-score-row"><ScoreRing score={selectedJob.match.score} /><div><strong>{selectedJob.match.matchedCount} of {selectedJob.match.requiredCount}</strong><span>skills matched, including related</span></div></div>
+        <div className="large-score-row"><ScoreRing score={selectedJob.match.score} /><div><strong>{selectedJob.match.matchedCount} of {selectedJob.match.requiredCount}</strong><span>skills matched exactly</span></div></div>
         <div className="inspector-divider" />
         <div className="breakdown-title">Why this match?</div>
         <div className="skill-breakdown">{selectedJob.match.skillBreakdown.map((item) => (
-          <div key={item.skill}><span className={`breakdown-icon ${item.matchType}`}>{item.matchType === "exact" ? <Icon name="check" size={13} /> : item.matchType === "related" ? "≈" : "·"}</span><span>{item.skill}</span><small>{item.reason}</small></div>
+          <div key={item.skill}><span className={item.matched ? "breakdown-icon matched" : "breakdown-icon"}>{item.matched ? <Icon name="check" size={13} /> : "·"}</span><span>{item.skill}</span><small>{item.reason}</small></div>
         ))}</div>
         <div className="location-fit"><Icon name="map" size={15} /><span>{selectedJob.match.locationFits ? "Location works for this candidate" : "Location may need discussion"}</span></div>
       </div>}
